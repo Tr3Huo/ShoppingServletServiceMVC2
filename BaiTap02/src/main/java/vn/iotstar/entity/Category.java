@@ -82,4 +82,29 @@ public class Category implements Serializable {
 		video.setCategory(null);
 		return video;
 	}
+
+	// Getter/Setter aliases for JSP EL compatibility (cate.id, cate.name, cate.icon)
+	public int getId() {
+		return categoryId;
+	}
+
+	public void setId(int id) {
+		this.categoryId = id;
+	}
+
+	public String getName() {
+		return categoryname;
+	}
+
+	public void setName(String name) {
+		this.categoryname = name;
+	}
+
+	public String getIcon() {
+		return images;
+	}
+
+	public void setIcon(String icon) {
+		this.images = icon;
+	}
 }
