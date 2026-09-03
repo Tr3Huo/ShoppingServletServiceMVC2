@@ -34,10 +34,16 @@ public class LoginController extends HttpServlet {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals(COOKIE_REMEMBER)) {
-					session = req.getSession(true);
-					session.setAttribute(SESSION_USERNAME, cookie.getValue());
-					resp.sendRedirect(req.getContextPath() + "/waiting");
-					return;
+					String username = cookie.getValue();
+					UserService service = new UserServiceImpl();
+					User user = service.get(username);
+					if (user != null) {
+						session = req.getSession(true);
+						session.setAttribute("account", user);
+						session.setAttribute(SESSION_USERNAME, username);
+						resp.sendRedirect(req.getContextPath() + "/waiting");
+						return;
+					}
 				}
 			}
 		}

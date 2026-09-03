@@ -37,28 +37,12 @@
     .btn-login:hover {
         background-color: #008fca;
     }
-    .demo-account {
-        background-color: #eef7fc;
-        border: 1px dashed #00a8e6;
-        border-radius: 6px;
-        padding: 10px 15px;
-        margin-bottom: 20px;
-        font-size: 13px;
-        color: #333;
-    }
 </style>
 </head>
 <body>
 <div class="container">
     <div class="login-container">
         <h2 class="login-title">Đăng Nhập</h2>
-
-        <!-- Gợi ý tài khoản demo -->
-        <div class="demo-account">
-            <strong><i class="fa fa-info-circle"></i> Tài khoản Admin mặc định:</strong><br>
-            - Tên đăng nhập: <b>admin</b><br>
-            - Mật khẩu: <b>123</b>
-        </div>
 
         <c:if test="${alert != null}">
             <div class="alert alert-danger" style="margin-bottom: 15px;">${alert}</div>
@@ -68,14 +52,14 @@
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-                    <input type="text" placeholder="Tài khoản" name="username" class="form-control" value="admin" required>
+                    <input type="text" placeholder="Tài khoản" name="username" class="form-control" required>
                 </div>
             </div>
 
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
-                    <input type="password" placeholder="Mật khẩu" name="password" class="form-control" value="123" required>
+                    <input type="password" placeholder="Mật khẩu" name="password" class="form-control" required>
                 </div>
             </div>
 
