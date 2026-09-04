@@ -13,4 +13,7 @@ public interface UserDao {
 
 	boolean checkExistPhone(String phone);
 
+	User findById(int id);
+
+	void update(User user);
 }

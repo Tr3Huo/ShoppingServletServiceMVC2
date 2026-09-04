@@ -95,4 +95,30 @@ public class UserDaoImpl implements UserDao {
             enma.close();
         }
     }
+    @Override
+    public User findById(int id) {
+        EntityManager enma = JPAConfig.getEntityManager();
+        try {
+            return enma.find(User.class, id);
+        } finally {
+            enma.close();
+        }
+    }
+
+    @Override
+    public void update(User user) {
+        EntityManager enma = JPAConfig.getEntityManager();
+        EntityTransaction trans = enma.getTransaction();
+        try {
+            trans.begin();
+            enma.merge(user); 
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            trans.rollback();
+            throw e;
+        } finally {
+            enma.close();
+        }
+    }
 }

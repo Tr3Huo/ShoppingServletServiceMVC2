@@ -9,6 +9,7 @@ vn\iotstar\service\UserService.class
 vn\iotstar\configs\JPAConfig.class
 vn\iotstar\dao\UserDao.class
 vn\iotstar\controller\web\LogoutController.class
+vn\iotstar\configs\AppContextListener.class
 vn\iotstar\controller\web\LoginController.class
 vn\iotstar\controller\web\HomeController.class
 vn\iotstar\controller\admin\CategoryController.class

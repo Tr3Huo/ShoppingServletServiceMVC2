@@ -11,7 +11,7 @@
 <body>
     <div class="container" style="margin-top: 30px;">
         <h2>Thêm mới danh mục</h2>
-        <form role="form" action="add" method="post" enctype="multipart/form-data">
+        <form role="form" action="<c:url value='/admin/category/add'/>" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Tên danh mục:</label> 
                 <input class="form-control" placeholder="Nhập tên danh mục" name="name" required />
@@ -24,7 +24,7 @@
             <button type="reset" class="btn btn-default">Hủy</button>
         </form>
         <br>
-        <a href="<c:url value='/admin/category/list'/>" class="btn btn-primary">Quay lại danh sách</a>
+        <a href="<c:url value='/admin/categories'/>" class="btn btn-primary">Quay lại danh sách</a>
     </div>
 </body>
 </html>

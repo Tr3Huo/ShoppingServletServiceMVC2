@@ -21,7 +21,7 @@ import vn.iotstar.service.impl.CategoryServiceImpl;
 import vn.iotstar.util.Constant;
 
 @MultipartConfig()
-@WebServlet(urlPatterns = { "/admin/categories", "/admin/category/add", "/admin/category/insert", "/admin/category/edit", "/admin/category/update", "/admin/category/delete" })
+@WebServlet(urlPatterns = { "/admin/categories", "/admin/category/list", "/admin/category/add", "/admin/category/insert", "/admin/category/edit", "/admin/category/update", "/admin/category/delete" })
 public class CategoryController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public CategoryService cateService = new CategoryServiceImpl();
@@ -29,23 +29,24 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
-        if (url.contains("/admin/categories")) {
+        if (url.contains("/admin/categories") || url.contains("/admin/category/list")) {
             List<Category> list = cateService.findAll();
             req.setAttribute("listcate", list);
-            req.getRequestDispatcher("/views/admin/category-list.jsp").forward(req, resp);
+            req.setAttribute("cateList", list);
+            req.getRequestDispatcher("/views/admin/category/list.jsp").forward(req, resp);
         } else if (url.contains("/admin/category/add")) {
-            req.getRequestDispatcher("/views/admin/category-add.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/admin/category/add.jsp").forward(req, resp);
         } else if (url.contains("/admin/category/edit")) {
             int id = Integer.parseInt(req.getParameter("id"));
-            Category category = null; // Đã sửa: gán null để tránh lỗi chưa khởi tạo
+            Category category = null;
 			try {
-                // Đã sửa: CategoryService thành cateService
 				category = cateService.findById(id); 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
             req.setAttribute("cate", category);
-            req.getRequestDispatcher("/views/admin/category-edit.jsp").forward(req, resp);
+            req.setAttribute("category", category);
+            req.getRequestDispatcher("/views/admin/category/edit.jsp").forward(req, resp);
         } else {
             int id = Integer.parseInt(req.getParameter("id"));
             try {
@@ -63,9 +64,17 @@ public class CategoryController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String url = req.getRequestURI();
 
-        if (url.contains("/admin/category/insert")) {
+        if (url.contains("/admin/category/insert") || url.contains("/admin/category/add")) {
             String categoryname = req.getParameter("categoryname");
-            int status = Integer.parseInt(req.getParameter("status"));
+            if (categoryname == null || categoryname.isEmpty()) {
+                categoryname = req.getParameter("name");
+            }
+            int status = 1;
+            if (req.getParameter("status") != null) {
+                try {
+                    status = Integer.parseInt(req.getParameter("status"));
+                } catch (Exception ignored) {}
+            }
             String images = req.getParameter("images");
 
             Category category = new Category();
@@ -79,7 +88,10 @@ public class CategoryController extends HttpServlet {
 
             try {
                 Part part = req.getPart("images1");
-                if (part.getSize() > 0) {
+                if (part == null || part.getSize() == 0) {
+                    part = req.getPart("icon");
+                }
+                if (part != null && part.getSize() > 0) {
                     String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
                     int index = filename.lastIndexOf(".");
                     String ext = filename.substring(index + 1);
@@ -91,17 +103,29 @@ public class CategoryController extends HttpServlet {
                 } else {
                     category.setImages("avatar.png");
                 }
-            } catch (FileNotFoundException fne) {
+            } catch (Exception fne) {
                 fne.printStackTrace();
             }
             cateService.insert(category);
             resp.sendRedirect(req.getContextPath() + "/admin/categories");
         }
 
-        if (url.contains("/admin/category/update")) {
-            int categoryid = Integer.parseInt(req.getParameter("categoryid"));
+        if (url.contains("/admin/category/update") || url.contains("/admin/category/edit")) {
+            String idStr = req.getParameter("categoryid");
+            if (idStr == null || idStr.isEmpty()) {
+                idStr = req.getParameter("id");
+            }
+            int categoryid = Integer.parseInt(idStr);
             String categoryname = req.getParameter("categoryname");
-            int status = Integer.parseInt(req.getParameter("status"));
+            if (categoryname == null || categoryname.isEmpty()) {
+                categoryname = req.getParameter("name");
+            }
+            int status = 1;
+            if (req.getParameter("status") != null) {
+                try {
+                    status = Integer.parseInt(req.getParameter("status"));
+                } catch (Exception ignored) {}
+            }
             String images = req.getParameter("images");
 
             Category category = null;
@@ -110,6 +134,10 @@ public class CategoryController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+            if (category == null) {
+                category = new Category();
+                category.setCategoryId(categoryid);
+            }
             String fileold = category.getImages();
 
             category.setCategoryname(categoryname);
@@ -122,9 +150,12 @@ public class CategoryController extends HttpServlet {
 
             try {
                 Part part = req.getPart("images1");
-                if (part.getSize() > 0) {
-                    if (fileold != null && !fileold.isEmpty() && !fileold.substring(0, 5).equals("https")) {
-                        deleteFile(uploadPath + "\\" + fileold);
+                if (part == null || part.getSize() == 0) {
+                    part = req.getPart("icon");
+                }
+                if (part != null && part.getSize() > 0) {
+                    if (fileold != null && !fileold.isEmpty() && !fileold.startsWith("http")) {
+                        deleteFile(uploadPath + File.separator + fileold);
                     }
                     String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
                     int index = filename.lastIndexOf(".");
@@ -137,7 +168,7 @@ public class CategoryController extends HttpServlet {
                 } else {
                     category.setImages(fileold);
                 }
-            } catch (FileNotFoundException fne) {
+            } catch (Exception fne) {
                 fne.printStackTrace();
             }
             cateService.update(category);

@@ -34,7 +34,7 @@
             <button type="reset" class="btn btn-default">Reset</button>
         </form>
         <br>
-        <a href="<c:url value='/admin/category/list'/>" class="btn btn-secondary">Quay lại danh sách</a>
+        <a href="<c:url value='/admin/categories'/>" class="btn btn-primary">Quay lại danh sách</a>
     </div>
 </body>
 </html>

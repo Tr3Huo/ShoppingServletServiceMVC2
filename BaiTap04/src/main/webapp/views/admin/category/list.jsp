@@ -31,7 +31,7 @@
             </div>
             <div class="panel-body">
                 <!-- Nút thêm mới -->
-                <a href="add" class="btn btn-success" style="margin-bottom: 15px;">
+                <a href="<c:url value='/admin/category/add'/>" class="btn btn-success" style="margin-bottom: 15px;">
                     <span class="glyphicon glyphicon-plus"></span> Thêm danh mục mới
                 </a>
 
@@ -60,8 +60,8 @@
                                     </td>
                                     <td style="vertical-align: middle; font-weight: 500;">${cate.name}</td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <a href="edit?id=${cate.id}" class="btn btn-primary btn-sm">Sửa</a>
-                                        <a href="delete?id=${cate.id}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+                                        <a href="<c:url value='/admin/category/edit?id=${cate.id}'/>" class="btn btn-primary btn-sm">Sửa</a>
+                                        <a href="<c:url value='/admin/category/delete?id=${cate.id}'/>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
                                     </td>
                                 </tr>
                             </c:forEach>

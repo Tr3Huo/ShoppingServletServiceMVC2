@@ -33,6 +33,10 @@ public class User implements Serializable {
 	@Column(name="phone", columnDefinition ="VARCHAR(20) NULL")
 	private String phone;
 
+	// Bổ sung thuộc tính images
+	@Column(name="images", columnDefinition ="VARCHAR(500) NULL")
+	private String images;
+
 	public User() {
 	}
 
@@ -90,5 +94,14 @@ public class User implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	// Bổ sung Getter và Setter cho images
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
 	}
 }
