@@ -2,6 +2,10 @@ package vn.iotstar.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="users") 
@@ -15,21 +19,29 @@ public class User implements Serializable {
 	@Column(name="id")
 	private int id;
 
+	@NotEmpty(message = "Tên đăng nhập không được để trống")
+	@Size(min = 3, max = 20, message = "Tên đăng nhập từ 3 đến 20 ký tự")
 	@Column(name="username", columnDefinition ="VARCHAR(255) NULL")
 	private String userName;
 
+	@NotEmpty(message = "Mật khẩu không được để trống")
+	@Size(min = 3, message = "Mật khẩu phải có ít nhất 3 ký tự")
 	@Column(name="password", columnDefinition ="VARCHAR(255) NULL")
 	private String passWord;
 
+	@NotEmpty(message = "Email không được để trống")
+	@Email(message = "Email không đúng định dạng")
 	@Column(name="email", columnDefinition ="VARCHAR(255) NULL")
 	private String email;
 
+	@NotEmpty(message = "Họ và tên không được để trống")
 	@Column(name="fullname", columnDefinition ="NVARCHAR(255) NULL")
 	private String fullName;
 
 	@Column(name="roleid")
 	private Integer roleid = 3;
 
+	@Pattern(regexp = "^\\d{10,11}$", message = "Số điện thoại phải từ 10 đến 11 số")
 	@Column(name="phone", columnDefinition ="VARCHAR(20) NULL")
 	private String phone;
 

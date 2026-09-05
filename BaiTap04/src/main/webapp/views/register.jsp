@@ -50,47 +50,56 @@
         </c:if>
 
         <form action="${pageContext.request.contextPath}/register" method="post">
-            <!-- 1. Tài khoản -->
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-                    <input type="text" placeholder="Tên tài khoản" name="username" class="form-control" required>
+                    <input type="text" placeholder="Tên tài khoản" name="username" class="form-control" value="${username}" required>
                 </div>
+                <c:if test="${not empty errors.userName}">
+                    <span class="text-danger" style="font-size: 13px;">${errors.userName}</span>
+                </c:if>
             </div>
 
-            <!-- 2. Họ tên -->
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span> 
-                    <input type="text" placeholder="Họ và tên" name="fullname" class="form-control" required>
+                    <input type="text" placeholder="Họ và tên" name="fullname" class="form-control" value="${fullname}" required>
                 </div>
+                <c:if test="${not empty errors.fullName}">
+                    <span class="text-danger" style="font-size: 13px;">${errors.fullName}</span>
+                </c:if>
             </div>
 
-            <!-- 3. Nhập Email -->
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
-                    <input type="email" placeholder="Email" name="email" class="form-control" required>
+                    <input type="email" placeholder="Email" name="email" class="form-control" value="${email}" required>
                 </div>
+                <c:if test="${not empty errors.email}">
+                    <span class="text-danger" style="font-size: 13px;">${errors.email}</span>
+                </c:if>
             </div>
 
-            <!-- 4. Số điện thoại -->
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
-                    <input type="text" placeholder="Số điện thoại" name="phone" class="form-control" required>
+                    <input type="text" placeholder="Số điện thoại" name="phone" class="form-control" value="${phone}" required>
                 </div>
+                <c:if test="${not empty errors.phone}">
+                    <span class="text-danger" style="font-size: 13px;">${errors.phone}</span>
+                </c:if>
             </div>
 
-            <!-- 5. Mật khẩu -->
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
                     <input type="password" placeholder="Mật khẩu" name="password" class="form-control" required>
                 </div>
+                <c:if test="${not empty errors.passWord}">
+                    <span class="text-danger" style="font-size: 13px;">${errors.passWord}</span>
+                </c:if>
             </div>
 
-            <!-- 6. Nhập lại mật khẩu -->
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
@@ -98,12 +107,10 @@
                 </div>
             </div>
 
-            <!-- Nút Tạo tài khoản -->
             <button type="submit" class="btn btn-primary btn-register">
                 <i class="fa fa-user-plus"></i> Tạo tài khoản
             </button>
 
-            <!-- Link chuyển về trang đăng nhập -->
             <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #777;">
                 <p>Nếu bạn đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a></p>
             </div>

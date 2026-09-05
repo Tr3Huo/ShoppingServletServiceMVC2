@@ -41,6 +41,11 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>8.0.5.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.glassfish.expressly</groupId>
+			<artifactId>expressly</artifactId>
+			<version>5.0.0</version>
+		</dependency>
 
 		<!-- 4. Xử lý File Upload -->
 		<dependency>
@@ -59,6 +64,13 @@
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
 			<version>6.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Thêm javax.servlet-api để Sitemesh 3 biên dịch được (vì Sitemesh 3 dùng javax) -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -100,12 +112,6 @@
 			<version>2.0.3</version>
 		</dependency>
 
-		<!-- 9. Sitemesh -->
-		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>sitemesh</artifactId>
-			<version>2.4.2</version>
-		</dependency>
 	</dependencies>
 
 	<build>

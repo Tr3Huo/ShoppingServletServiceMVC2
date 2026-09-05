@@ -13,6 +13,15 @@ import jakarta.servlet.http.HttpSession;
 import vn.iotstar.service.UserService;
 import vn.iotstar.service.impl.UserServiceImpl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+import vn.iotstar.entity.User;
+
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/register")
 public class RegisterController extends HttpServlet {
@@ -54,12 +63,45 @@ public class RegisterController extends HttpServlet {
         String fullname = req.getParameter("fullname");
         String phone = req.getParameter("phone");
 
+        User user = new User();
+        user.setUserName(username);
+        user.setPassWord(password);
+        user.setEmail(email);
+        user.setFullName(fullname);
+        user.setPhone(phone);
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        if (!violations.isEmpty()) {
+            Map<String, String> errors = new HashMap<>();
+            for (ConstraintViolation<User> violation : violations) {
+                errors.put(violation.getPropertyPath().toString(), violation.getMessage());
+            }
+            req.setAttribute("errors", errors);
+            
+            req.setAttribute("username", username);
+            req.setAttribute("email", email);
+            req.setAttribute("fullname", fullname);
+            req.setAttribute("phone", phone);
+            
+            req.getRequestDispatcher(REGISTER).forward(req, resp);
+            return;
+        }
+
         UserService service = new UserServiceImpl();
         String alertMsg = "";
 
         if (repassword != null && !repassword.equals(password)) {
             alertMsg = "Mật khẩu xác nhận không khớp!";
             req.setAttribute("alert", alertMsg);
+            
+            req.setAttribute("username", username);
+            req.setAttribute("email", email);
+            req.setAttribute("fullname", fullname);
+            req.setAttribute("phone", phone);
+            
             req.getRequestDispatcher(REGISTER).forward(req, resp);
             return;
         }

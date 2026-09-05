@@ -1,20 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><decorator:title default="Trang chủ" /></title>
+<title>${empty title ? 'Trang chủ' : title}</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
 </style>
-<decorator:head />
+${head}
 </head>
 <body>
-    <!-- Thanh Menu Header Sitemesh Decorator -->
     <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
         <div class="container">
             <div class="navbar-header">
@@ -41,8 +39,6 @@
             </ul>
         </div>
     </nav>
-
-    <!-- Nội dung chính được Sitemesh nhúng vào đây -->
-    <decorator:body />
+    ${body}
 </body>
 </html>

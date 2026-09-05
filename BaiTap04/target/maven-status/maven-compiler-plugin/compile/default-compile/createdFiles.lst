@@ -19,6 +19,7 @@ vn\iotstar\util\Constant.class
 vn\iotstar\entity\Category.class
 vn\iotstar\service\impl\UserServiceImpl.class
 vn\iotstar\configs\Test.class
+vn\iotstar\configs\SitemeshFilter.class
 vn\iotstar\controller\web\WaitingController.class
 vn\iotstar\dao\ProductDao.class
 vn\iotstar\service\UserService.class
@@ -30,5 +31,6 @@ vn\iotstar\controller\admin\CategoryController.class
 vn\iotstar\controller\web\DownloadImageController.class
 vn\iotstar\dao\impl\CategoryDaoImpl.class
 vn\iotstar\service\impl\CategoryServiceImpl.class
+vn\iotstar\configs\SitemeshFilter$CharResponseWrapper.class
 vn\iotstar\controller\web\RegisterController.class
 vn\iotstar\service\impl\ProductServiceImpl.class

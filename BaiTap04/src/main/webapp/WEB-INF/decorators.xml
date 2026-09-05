@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<decorators defaultdir="/common">
-    <!-- Cấu hình Sitemesh Decorator cho Profile -->
-    <decorator name="web" page="web/decorator.jsp">
-        <pattern>/profile*</pattern>
-    </decorator>
-</decorators>

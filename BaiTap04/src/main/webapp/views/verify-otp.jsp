@@ -65,9 +65,6 @@
         <c:if test="${message != null}">
             <div class="alert alert-success" style="margin-bottom: 15px;">${message}</div>
         </c:if>
-        <c:if test="${sessionScope.message != null}">
-            <div class="alert alert-success" style="margin-bottom: 15px;">${sessionScope.message}</div>
-        </c:if>
 
         <c:if test="${sessionScope.otpNotice != null}">
             <div class="alert alert-info" style="margin-bottom: 15px; font-size: 13px;">
