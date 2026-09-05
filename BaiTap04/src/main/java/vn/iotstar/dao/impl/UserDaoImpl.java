@@ -95,15 +95,6 @@ public class UserDaoImpl implements UserDao {
             enma.close();
         }
     }
-    @Override
-    public User findById(int id) {
-        EntityManager enma = JPAConfig.getEntityManager();
-        try {
-            return enma.find(User.class, id);
-        } finally {
-            enma.close();
-        }
-    }
 
     @Override
     public void update(User user) {
@@ -111,12 +102,52 @@ public class UserDaoImpl implements UserDao {
         EntityTransaction trans = enma.getTransaction();
         try {
             trans.begin();
-            enma.merge(user); 
+            enma.merge(user);
             trans.commit();
         } catch (Exception e) {
             e.printStackTrace();
             trans.rollback();
             throw e;
+        } finally {
+            enma.close();
+        }
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        EntityManager enma = JPAConfig.getEntityManager();
+        try {
+            String jpql = "SELECT u FROM User u WHERE u.email = :email";
+            TypedQuery<User> query = enma.createQuery(jpql, User.class);
+            query.setParameter("email", email);
+            java.util.List<User> list = query.getResultList();
+            if (list != null && !list.isEmpty()) {
+                return list.get(0);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            enma.close();
+        }
+    }
+
+    @Override
+    public User findByUsernameOrEmail(String keyword) {
+        EntityManager enma = JPAConfig.getEntityManager();
+        try {
+            String jpql = "SELECT u FROM User u WHERE u.userName = :keyword OR u.email = :keyword";
+            TypedQuery<User> query = enma.createQuery(jpql, User.class);
+            query.setParameter("keyword", keyword);
+            java.util.List<User> list = query.getResultList();
+            if (list != null && !list.isEmpty()) {
+                return list.get(0);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             enma.close();
         }

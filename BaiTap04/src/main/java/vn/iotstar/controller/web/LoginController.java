@@ -48,6 +48,17 @@ public class LoginController extends HttpServlet {
 			}
 		}
 
+		String activated = req.getParameter("activated");
+		if ("success".equals(activated)) {
+			req.setAttribute("message", "Kích hoạt tài khoản thành công! Bạn có thể đăng nhập ngay.");
+		} else if ("already".equals(activated)) {
+			req.setAttribute("message", "Tài khoản đã được kích hoạt từ trước. Hãy đăng nhập.");
+		}
+		String resetSuccess = req.getParameter("resetSuccess");
+		if ("true".equals(resetSuccess)) {
+			req.setAttribute("message", "Đặt lại mật khẩu thành công! Vui lòng đăng nhập bằng mật khẩu mới.");
+		}
+
 		req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
 	}
 
@@ -68,7 +79,7 @@ public class LoginController extends HttpServlet {
 
 		String alertMsg = "";
 
-		if (username.isEmpty() || password.isEmpty()) {
+		if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
 			alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
 			req.setAttribute("alert", alertMsg);
 			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
@@ -76,19 +87,29 @@ public class LoginController extends HttpServlet {
 		}
 
 		UserService service = new UserServiceImpl();
-		User user = service.login(username, password);
+		User user = service.login(username.trim(), password.trim());
 
 		if (user != null) {
+			// Kiểm tra trạng thái kích hoạt tài khoản
+			if (user.getStatus() == 0) {
+				alertMsg = "Tài khoản của bạn chưa được kích hoạt! Vui lòng xác thực mã OTP gửi về email " + user.getEmail() + " để kích hoạt.";
+				req.setAttribute("alert", alertMsg);
+				req.setAttribute("unactivatedEmail", user.getEmail());
+				req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+				return;
+			}
+
 			HttpSession session = req.getSession(true);
 			session.setAttribute("account", user);
+			session.setAttribute(SESSION_USERNAME, user.getUserName());
 
 			if (isRememberMe) {
-				saveRemeberMe(resp, username);
+				saveRemeberMe(resp, user.getUserName());
 			}
 
 			resp.sendRedirect(req.getContextPath() + "/waiting");
 		} else {
-			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
+			alertMsg = "Tài khoản hoặc mật khẩu không đúng!";
 			req.setAttribute("alert", alertMsg);
 			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
 		}
@@ -97,6 +118,7 @@ public class LoginController extends HttpServlet {
 	private void saveRemeberMe(HttpServletResponse response, String username) {
 		Cookie cookie = new Cookie(COOKIE_REMEMBER, username);
 		cookie.setMaxAge(30 * 60);
+		cookie.setPath("/");
 		response.addCookie(cookie);
 	}
 }

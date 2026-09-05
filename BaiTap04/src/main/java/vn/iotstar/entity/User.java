@@ -28,13 +28,18 @@ public class User implements Serializable {
 	private String fullName;
 
 	@Column(name="roleid")
-	private int roleid;
+	private Integer roleid = 3;
 
 	@Column(name="phone", columnDefinition ="VARCHAR(20) NULL")
 	private String phone;
 
-	// Bổ sung thuộc tính images
-	@Column(name="images", columnDefinition ="VARCHAR(500) NULL")
+	@Column(name="status")
+	private Integer status = 1; // 1: Active, 0: Pending activation
+
+	@Column(name="code", columnDefinition ="VARCHAR(50) NULL")
+	private String code; // OTP code
+
+	@Column(name="images", columnDefinition ="VARCHAR(255) NULL")
 	private String images;
 
 	public User() {
@@ -81,11 +86,11 @@ public class User implements Serializable {
 	}
 
 	public int getRoleid() {
-		return roleid;
+		return roleid != null ? roleid : 3;
 	}
 
-	public void setRoleid(int roleid) {
-		this.roleid = roleid;
+	public void setRoleid(Integer roleid) {
+		this.roleid = roleid != null ? roleid : 3;
 	}
 
 	public String getPhone() {
@@ -96,7 +101,22 @@ public class User implements Serializable {
 		this.phone = phone;
 	}
 
-	// Bổ sung Getter và Setter cho images
+	public int getStatus() {
+		return status != null ? status : 1;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status != null ? status : 1;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public String getImages() {
 		return images;
 	}

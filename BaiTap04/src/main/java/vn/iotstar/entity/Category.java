@@ -28,6 +28,10 @@ public class Category implements Serializable {
 	@OneToMany(mappedBy="categories")
 	private List<Video> videos;
 
+	//bi-directional many-to-one association to Product (1 - n)
+	@OneToMany(mappedBy="category")
+	private List<Product> products;
+
 	public Category() {
 	}
 
@@ -106,5 +110,13 @@ public class Category implements Serializable {
 
 	public void setIcon(String icon) {
 		this.images = icon;
+	}
+
+	public List<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 }

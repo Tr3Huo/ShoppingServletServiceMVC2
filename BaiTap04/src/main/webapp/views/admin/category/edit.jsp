@@ -9,6 +9,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
+    <nav class="navbar navbar-inverse" style="border-radius: 0; margin-bottom: 0;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="<c:url value='/home'/>">Shop MVC Trang Chủ</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="<c:url value='/admin/categories'/>">Quản lý danh mục</a></li>
+                <li><a href="<c:url value='/admin/products'/>">Quản lý sản phẩm</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container" style="margin-top: 30px;">
         <h2>Chỉnh sửa danh mục</h2>
         

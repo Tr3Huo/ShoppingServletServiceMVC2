@@ -48,11 +48,23 @@
             <div class="alert alert-danger" style="margin-bottom: 15px;">${alert}</div>
         </c:if>
 
+        <c:if test="${message != null}">
+            <div class="alert alert-success" style="margin-bottom: 15px;">${message}</div>
+        </c:if>
+
+        <c:if test="${unactivatedEmail != null}">
+            <div class="text-center" style="margin-bottom: 15px;">
+                <a href="${pageContext.request.contextPath}/verify-otp?email=${unactivatedEmail}" class="btn btn-warning btn-sm">
+                    <i class="fa fa-key"></i> Nhập mã OTP kích hoạt ngay
+                </a>
+            </div>
+        </c:if>
+
         <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-                    <input type="text" placeholder="Tài khoản" name="username" class="form-control" required>
+                    <input type="text" placeholder="Tài khoản hoặc Email" name="username" class="form-control" required>
                 </div>
             </div>
 
@@ -67,7 +79,7 @@
                 <label class="checkbox-inline" style="color: #666;">
                     <input type="checkbox" name="remember" value="on"> Nhớ tôi
                 </label>
-                <a href="#" style="color: #777; font-size: 13px;">Quên mật khẩu?</a>
+                <a href="${pageContext.request.contextPath}/forgot-password" style="color: #00a8e6; font-size: 13px;">Quên mật khẩu?</a>
             </div>
 
             <button type="submit" class="btn btn-primary btn-login">

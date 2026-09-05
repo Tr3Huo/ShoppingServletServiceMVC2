@@ -7,16 +7,24 @@
 <meta charset="UTF-8">
 <title>Quản lý danh mục</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <!-- Thanh Header phía trên -->
     <nav class="navbar navbar-inverse" style="border-radius: 0; margin-bottom: 0;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Trang Quản Trị Admin</a>
+                <a class="navbar-brand" href="<c:url value='/home'/>">Trang chủ Admin</a>
             </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="<c:url value='/admin/categories'/>"><i class="glyphicon glyphicon-folder-open"></i> Quản lý danh mục</a></li>
+                <li><a href="<c:url value='/admin/products'/>"><i class="glyphicon glyphicon-th-large"></i> Quản lý sản phẩm</a></li>
+                <c:if test="${sessionScope.account != null}">
+                    <li><a href="<c:url value='/profile'/>"><i class="fa fa-id-card"></i> Hồ sơ của tôi</a></li>
+                </c:if>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a>Xin chào, <b>admin</b></a></li>
+                <li><a href="<c:url value='/profile'/>">Xin chào, <b>${sessionScope.account != null ? sessionScope.account.fullName : 'Admin'}</b></a></li>
                 <li><a href="<c:url value='/logout'/>"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
             </ul>
         </div>

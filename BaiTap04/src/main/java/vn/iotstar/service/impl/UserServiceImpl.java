@@ -11,7 +11,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password) {
-        User user = this.get(username);
+        User user = this.findByUsernameOrEmail(username);
+        if (user == null) {
+            user = this.get(username);
+        }
         if (user != null && password.equals(user.getPassWord())) {
             return user;
         }
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
                     admin.setFullName("Administrator");
                     admin.setRoleid(1); // 1: Role Admin
                     admin.setPhone("0987654321");
+                    admin.setStatus(1);
                     userDao.insert(admin);
                     return admin;
                 }
@@ -39,6 +43,7 @@ public class UserServiceImpl implements UserService {
                 admin.setFullName("Administrator");
                 admin.setRoleid(1);
                 admin.setPhone("0987654321");
+                admin.setStatus(1);
                 return admin;
             }
         }
@@ -52,6 +57,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(String email, String password, String username, String fullname, String phone) {
+        return register(email, password, username, fullname, phone, null);
+    }
+
+    @Override
+    public boolean register(String email, String password, String username, String fullname, String phone, String code) {
         if (checkExistEmail(email) || checkExistUsername(username) || checkExistPhone(phone)) {
             return false; 
         }
@@ -62,9 +72,66 @@ public class UserServiceImpl implements UserService {
         user.setUserName(username);
         user.setFullName(fullname);
         user.setPhone(phone);
-        user.setRoleid(3); 
+        user.setRoleid(3);
+        user.setStatus(code != null ? 0 : 1); // Nếu có mã OTP thì cần kích hoạt (status=0)
+        user.setCode(code);
         userDao.insert(user);
         return true;
+    }
+
+    @Override
+    public boolean verifyOtp(String email, String otp) {
+        if (email == null || otp == null) return false;
+        User user = userDao.findByEmail(email.trim());
+        if (user != null && otp.trim().equals(user.getCode())) {
+            user.setStatus(1); // Kích hoạt thành công
+            user.setCode(null);
+            userDao.update(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) {
+        if (email == null || newPassword == null) return false;
+        User user = userDao.findByEmail(email.trim());
+        if (user != null) {
+            user.setPassWord(newPassword);
+            user.setCode(null);
+            userDao.update(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean resendOtp(String email, boolean isRegister) {
+        if (email == null) return false;
+        User user = userDao.findByEmail(email.trim());
+        if (user != null) {
+            String newOtp = vn.iotstar.util.EmailUtil.generateOtp();
+            user.setCode(newOtp);
+            userDao.update(user);
+            vn.iotstar.util.EmailUtil.sendOtpEmail(email.trim(), newOtp, isRegister);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    @Override
+    public User findByUsernameOrEmail(String keyword) {
+        return userDao.findByUsernameOrEmail(keyword);
     }
 
     @Override
