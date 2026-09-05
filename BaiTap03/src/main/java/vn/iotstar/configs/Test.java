@@ -22,12 +22,12 @@ public class Test {
 				admin.setPassWord("123");
 				admin.setEmail("admin@gmail.com");
 				admin.setFullName("Administrator");
-				admin.setRoleid(1); // 1: Role Admin
+				admin.setRoleid(1); 
 				admin.setPhone("0987654321");
 				em.persist(admin);
 				System.out.println("-> Created new admin account (admin / 123, roleid: 1)");
 			} else {
-				// Keep the first one and ensure its password is 123 and roleid is 1
+				
 				User firstAdmin = admins.get(0);
 				firstAdmin.setPassWord("123");
 				firstAdmin.setRoleid(1);
@@ -37,7 +37,7 @@ public class Test {
 				em.merge(firstAdmin);
 				System.out.println("-> Updated admin (id=" + firstAdmin.getId() + "): username=admin, password=123, roleid=1");
 
-				// Delete any duplicates
+				
 				for (int i = 1; i < admins.size(); i++) {
 					em.remove(admins.get(i));
 					System.out.println("-> Removed duplicate admin with id=" + admins.get(i).getId());

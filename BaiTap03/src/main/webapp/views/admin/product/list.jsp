@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <!-- Thanh Header Admin -->
+    
     <nav class="navbar navbar-inverse" style="border-radius: 0; margin-bottom: 0;">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -28,7 +28,7 @@
         </div>
     </nav>
 
-    <!-- Nội dung chính -->
+    
     <div class="container" style="margin-top: 25px; width: 95%;">
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color: #f5f5f5; display: flex; justify-content: space-between; align-items: center;">

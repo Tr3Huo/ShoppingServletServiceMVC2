@@ -48,7 +48,7 @@ public class ForgotPasswordController extends HttpServlet {
             return;
         }
 
-        // /forgot-password GET
+        
         req.getRequestDispatcher("/views/forgot-password.jsp").forward(req, resp);
     }
 
@@ -74,12 +74,12 @@ public class ForgotPasswordController extends HttpServlet {
                 return;
             }
 
-            // Tạo mã OTP quên mật khẩu
+            
             String otp = EmailUtil.generateOtp();
             user.setCode(otp);
             userService.update(user);
 
-            // Gửi email OTP
+            
             boolean emailSent = EmailUtil.sendOtpEmail(email, otp, false);
 
             HttpSession session = req.getSession(true);

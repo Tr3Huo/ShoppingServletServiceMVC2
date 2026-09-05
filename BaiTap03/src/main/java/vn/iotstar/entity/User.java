@@ -34,10 +34,10 @@ public class User implements Serializable {
 	private String phone;
 
 	@Column(name="status")
-	private Integer status = 1; // 1: Active, 0: Pending activation
+	private Integer status = 1; 
 
 	@Column(name="code", columnDefinition ="VARCHAR(50) NULL")
-	private String code; // OTP code
+	private String code; 
 
 	public User() {
 	}

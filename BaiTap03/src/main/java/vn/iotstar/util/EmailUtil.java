@@ -48,7 +48,7 @@ public class EmailUtil {
         System.out.println(">>> [EMAIL SERVICE] MÃ OTP LÀ: [ " + otp + " ]");
         System.out.println("================================================================================");
 
-        // Nếu chưa thay đổi email mặc định trong Constant.java
+        
         if (fromEmail == null || fromEmail.contains("your-email") || fromPassword == null || fromPassword.contains("your-app-password")) {
             System.out.println(">>> [EMAIL SERVICE THÔNG BÁO] Chưa cấu hình Gmail thật trong Constant.java.");
             System.out.println(">>> [EMAIL SERVICE] Mã OTP [ " + otp + " ] đã được in ở trên để bạn nhập xác nhận ngay.");

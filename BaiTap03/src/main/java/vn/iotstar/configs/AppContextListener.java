@@ -22,9 +22,9 @@ public class AppContextListener implements ServletContextListener {
                 admin.setPassWord("123");
                 admin.setEmail("admin@gmail.com");
                 admin.setFullName("Administrator");
-                admin.setRoleid(1); // 1: Role Admin
+                admin.setRoleid(1); 
                 admin.setPhone("0987654321");
-                admin.setStatus(1); // 1: Active
+                admin.setStatus(1); 
                 userService.insert(admin);
                 System.out.println(">>> [SUCCESS] Đã tự động tạo tài khoản Admin (admin / 123, roleid: 1, status: 1) trong CSDL!");
             } else {

@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-// ĐÃ SỬA: Đổi từ vn.iotstar.model.User sang vn.iotstar.entity.User
+
 import vn.iotstar.entity.User;
 import vn.iotstar.service.UserService;
 import vn.iotstar.service.impl.UserServiceImpl;
@@ -90,7 +90,7 @@ public class LoginController extends HttpServlet {
 		User user = service.login(username.trim(), password.trim());
 
 		if (user != null) {
-			// Kiểm tra trạng thái kích hoạt tài khoản
+			
 			if (user.getStatus() == 0) {
 				alertMsg = "Tài khoản của bạn chưa được kích hoạt! Vui lòng xác thực mã OTP gửi về email " + user.getEmail() + " để kích hoạt.";
 				req.setAttribute("alert", alertMsg);

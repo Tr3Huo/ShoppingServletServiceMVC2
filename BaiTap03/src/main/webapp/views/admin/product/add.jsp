@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <!-- Thanh Header Admin -->
+    
     <nav class="navbar navbar-inverse" style="border-radius: 0; margin-bottom: 0;">
         <div class="container-fluid">
             <div class="navbar-header">

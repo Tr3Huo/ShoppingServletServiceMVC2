@@ -28,7 +28,7 @@ public class Video implements Serializable {
 	@Column(name="views")
 	private int views;
 
-	//bi-directional many-to-one association to Category
+	
 	@ManyToOne
 	@JoinColumn(name="categoryId")
 	private Category categories;

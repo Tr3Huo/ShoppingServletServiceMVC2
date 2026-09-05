@@ -31,7 +31,7 @@ public class ProductController extends HttpServlet {
         String uri = req.getRequestURI();
         String action = req.getParameter("action");
 
-        // Xem chi tiết 01 sản phẩm: /product/detail?id=... hoặc /product?action=detail&id=...
+        
         if (uri.contains("/product/detail") || "detail".equalsIgnoreCase(action)) {
             String idStr = req.getParameter("id");
             if (idStr != null && !idStr.isEmpty()) {
@@ -41,7 +41,7 @@ public class ProductController extends HttpServlet {
                     if (product != null) {
                         req.setAttribute("product", product);
 
-                        // Sản phẩm cùng danh mục (gợi ý)
+                        
                         if (product.getCategory() != null) {
                             List<Product> related = productService.findByCategoryId(product.getCategory().getCategoryId(), 0, 4);
                             req.setAttribute("relatedProducts", related);
@@ -58,7 +58,7 @@ public class ProductController extends HttpServlet {
             return;
         }
 
-        // Hiển thị danh sách sản phẩm phân trang 6 sản phẩm/trang tại URL /product
+        
         int page = 1;
         try {
             if (req.getParameter("page") != null) {
@@ -69,7 +69,7 @@ public class ProductController extends HttpServlet {
         }
         if (page < 1) page = 1;
 
-        int pageSize = 6; // Phân trang 6sp/trang
+        int pageSize = 6; 
         String cateIdStr = req.getParameter("cateId");
         List<Product> list;
         int totalProducts;

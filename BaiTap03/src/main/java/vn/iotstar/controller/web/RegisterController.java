@@ -85,17 +85,17 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        // Tạo mã OTP 6 số để kích hoạt tài khoản qua email
+        
         String otp = vn.iotstar.util.EmailUtil.generateOtp();
 
-        // Đăng ký user với status = 0 (chưa kích hoạt) và code = otp
+        
         boolean isSuccess = service.register(email, password, username, fullname, phone, otp);
         
         if (isSuccess) {
-            // Gửi email OTP
+            
             boolean emailSent = vn.iotstar.util.EmailUtil.sendOtpEmail(email, otp, true);
 
-            // Lưu email vào session và chuyển hướng sang trang nhập OTP
+            
             HttpSession session = req.getSession(true);
             session.setAttribute("registeredEmail", email);
             if (!emailSent) {

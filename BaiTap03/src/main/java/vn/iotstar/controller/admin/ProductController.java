@@ -60,7 +60,7 @@ public class ProductController extends HttpServlet {
             }
             resp.sendRedirect(req.getContextPath() + "/admin/products");
         } else {
-            // /admin/products hoặc /admin/product/list
+            
             List<Product> list = productService.findAll();
             req.setAttribute("productList", list);
             req.getRequestDispatcher("/views/admin/product/list.jsp").forward(req, resp);
@@ -73,7 +73,7 @@ public class ProductController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String uri = req.getRequestURI();
 
-        // Tạo thư mục upload nếu chưa tồn tại
+        
         String uploadPath = Constant.DIR;
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
@@ -120,7 +120,7 @@ public class ProductController extends HttpServlet {
                 product.setCategory(category);
             }
 
-            // Xử lý upload file bằng Multipart
+            
             try {
                 Part part = req.getPart("image");
                 if (part != null && part.getSize() > 0 && part.getSubmittedFileName() != null && !part.getSubmittedFileName().trim().isEmpty()) {
@@ -131,7 +131,7 @@ public class ProductController extends HttpServlet {
                     part.write(uploadPath + File.separator + fname);
                     product.setImages(fname);
                 } else {
-                    // Người dùng không đính kèm ảnh -> lưu null vào CSDL, không gán ảnh mặc định
+                    
                     product.setImages(null);
                 }
             } catch (Exception e) {
@@ -190,11 +190,11 @@ public class ProductController extends HttpServlet {
                 product.setCategory(category);
             }
 
-            // Xử lý upload file mới nếu có
+            
             try {
                 Part part = req.getPart("image");
                 if (part != null && part.getSize() > 0 && part.getSubmittedFileName() != null && !part.getSubmittedFileName().isEmpty()) {
-                    // Xóa file cũ
+                    
                     if (oldImage != null && !oldImage.isEmpty() && !oldImage.equals("default-product.png")) {
                         deleteFile(uploadPath + File.separator + oldImage);
                     }

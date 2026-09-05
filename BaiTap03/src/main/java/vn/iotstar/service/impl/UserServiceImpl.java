@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
             return user;
         }
 
-        // Đảm bảo tài khoản admin (admin / 123) luôn đăng nhập được trên web
+        
         if ("admin".equalsIgnoreCase(username) && "123".equals(password)) {
             try {
                 if (user == null) {
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
                     admin.setPassWord("123");
                     admin.setEmail("admin@gmail.com");
                     admin.setFullName("Administrator");
-                    admin.setRoleid(1); // 1: Role Admin
+                    admin.setRoleid(1); 
                     admin.setPhone("0987654321");
                     admin.setStatus(1);
                     userDao.insert(admin);
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
         user.setFullName(fullname);
         user.setPhone(phone);
         user.setRoleid(3);
-        user.setStatus(code != null ? 0 : 1); // Nếu có mã OTP thì cần kích hoạt (status=0)
+        user.setStatus(code != null ? 0 : 1); 
         user.setCode(code);
         userDao.insert(user);
         return true;
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
         if (email == null || otp == null) return false;
         User user = userDao.findByEmail(email.trim());
         if (user != null && otp.trim().equals(user.getCode())) {
-            user.setStatus(1); // Kích hoạt thành công
+            user.setStatus(1); 
             user.setCode(null);
             userDao.update(user);
             return true;

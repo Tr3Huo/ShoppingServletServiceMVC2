@@ -37,7 +37,7 @@ public class Product implements Serializable {
     @Column(name="createdDate")
     private Date createdDate = new Date();
 
-    // Many-to-one relationship with Category
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="categoryId")
     private Category category;
@@ -117,7 +117,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    // EL getter aliases
+    
     public int getId() {
         return productId;
     }

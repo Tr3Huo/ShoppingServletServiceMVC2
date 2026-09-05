@@ -129,7 +129,7 @@
 </style>
 </head>
 <body>
-    <!-- Thanh Menu Header -->
+    
     <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
         <div class="container">
             <div class="navbar-header">
@@ -157,7 +157,7 @@
         </div>
     </nav>
 
-    <!-- Banner chào mừng -->
+    
     <div class="hero-banner">
         <div class="container">
             <h1 style="font-weight: bold; margin-bottom: 10px;">Chào Mừng Đến Với Shopping MVC</h1>
@@ -169,7 +169,7 @@
     </div>
 
     <div class="container">
-        <!-- PHẦN 1: DANH MỤC SẢN PHẨM -->
+        
         <div>
             <h3 class="section-title"><i class="fa fa-list"></i> Danh Mục Sản Phẩm</h3>
             <div class="row">
@@ -189,7 +189,7 @@
 
         <hr style="margin: 30px 0;">
 
-        <!-- PHẦN 2: 10 SẢN PHẨM MỚI NHẤT (Requirement 4b & 4d) -->
+        
         <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h3 class="section-title" style="margin-bottom: 0;">
@@ -205,7 +205,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-3" style="padding: 10px;">
                         <div class="prod-card">
                             <div>
-                                <!-- Bấm chuột vào hình ảnh sản phẩm để xem chi tiết -->
+                                
                                 <div class="prod-img-box">
                                     <a href="<c:url value='/product/detail?id=${prod.productId}'/>">
                                         <c:if test="${not empty prod.images}">
@@ -220,7 +220,7 @@
                                     </a>
                                 </div>
 
-                                <!-- Bấm chuột vào tên sản phẩm để xem chi tiết -->
+                                
                                 <h4 class="prod-title">
                                     <a href="<c:url value='/product/detail?id=${prod.productId}'/>" title="${prod.productName}">
                                         ${prod.productName}
@@ -254,7 +254,7 @@
             </div>
         </div>
 
-        <!-- Banner chuyển sang trang /product -->
+        
         <div class="well text-center" style="margin: 40px 0; background-color: #eef6fc; border-color: #bce8f1;">
             <h4>Bạn muốn xem thêm nhiều sản phẩm khác?</h4>
             <a href="<c:url value='/product'/>" class="btn btn-primary">

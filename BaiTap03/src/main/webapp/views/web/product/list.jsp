@@ -100,7 +100,7 @@
 </style>
 </head>
 <body>
-    <!-- Navbar Header -->
+    
     <nav class="navbar navbar-default" style="border-radius: 0; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.08);">
         <div class="container">
             <div class="navbar-header">
@@ -126,10 +126,10 @@
         </div>
     </nav>
 
-    <!-- Nội dung chính -->
+    
     <div class="container">
         <div class="row">
-            <!-- Sidebar Danh mục -->
+            
             <div class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color: #00a8e6; color: white; font-weight: bold;">
@@ -158,7 +158,7 @@
                 </div>
             </div>
 
-            <!-- Danh sách sản phẩm phân trang 6sp/trang -->
+            
             <div class="col-md-9">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 style="margin: 0; color: #333; font-weight: bold;">
@@ -167,7 +167,7 @@
                     <span class="text-muted">Hiển thị trang ${currentPage} / ${totalPages} (Tổng: ${totalProducts} sản phẩm)</span>
                 </div>
 
-                <!-- Grid 6 sản phẩm/trang (3 cột x 2 hàng) -->
+                
                 <div class="row">
                     <c:forEach items="${productList}" var="prod">
                         <div class="col-sm-6 col-md-4">
@@ -218,11 +218,11 @@
                     </c:if>
                 </div>
 
-                <!-- Thanh phân trang 6sp/trang -->
+                
                 <c:if test="${totalPages > 1}">
                     <div style="text-align: center; margin-top: 20px; margin-bottom: 40px;">
                         <ul class="pagination">
-                            <!-- Nút Trang trước -->
+                            
                             <c:if test="${currentPage > 1}">
                                 <li>
                                     <a href="<c:url value='/product?page=${currentPage - 1}${selectedCateId != null ? \"&cateId=\" : \"\"}${selectedCateId != null ? selectedCateId : \"\"}'/>" aria-label="Previous">
@@ -234,7 +234,7 @@
                                 <li class="disabled"><span>&laquo; Trước</span></li>
                             </c:if>
 
-                            <!-- Các số trang -->
+                            
                             <c:forEach begin="1" end="${totalPages}" var="i">
                                 <li class="${currentPage == i ? 'active' : ''}">
                                     <a href="<c:url value='/product?page=${i}${selectedCateId != null ? \"&cateId=\" : \"\"}${selectedCateId != null ? selectedCateId : \"\"}'/>">
@@ -243,7 +243,7 @@
                                 </li>
                             </c:forEach>
 
-                            <!-- Nút Trang sau -->
+                            
                             <c:if test="${currentPage < totalPages}">
                                 <li>
                                     <a href="<c:url value='/product?page=${currentPage + 1}${selectedCateId != null ? \"&cateId=\" : \"\"}${selectedCateId != null ? selectedCateId : \"\"}'/>" aria-label="Next">

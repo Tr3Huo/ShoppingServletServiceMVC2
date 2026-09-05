@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-    <!-- Thanh Header phía trên -->
+    
     <nav class="navbar navbar-inverse" style="border-radius: 0; margin-bottom: 0;">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -26,7 +26,7 @@
         </div>
     </nav>
 
-    <!-- Nội dung chính được mở rộng toàn màn hình (col-md-12) sau khi đã bỏ menu bên trái -->
+    
     <div class="container" style="margin-top: 30px; width: 95%;">
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color: #f5f5f5;">
@@ -34,12 +34,12 @@
                 <p class="text-muted">Nơi bạn có thể quản lý danh mục sản phẩm của mình</p>
             </div>
             <div class="panel-body">
-                <!-- Nút thêm mới -->
+                
                 <a href="<c:url value='/admin/category/add'/>" class="btn btn-success" style="margin-bottom: 15px;">
                     <span class="glyphicon glyphicon-plus"></span> Thêm danh mục mới
                 </a>
 
-                <!-- Bảng hiển thị danh sách -->
+                
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead style="background-color: #f9f9f9;">

@@ -24,11 +24,11 @@ public class Category implements Serializable {
 	@Column(name="status")
 	private int status;
 
-	//bi-directional many-to-one association to Video
+	
 	@OneToMany(mappedBy="categories")
 	private List<Video> videos;
 
-	//bi-directional many-to-one association to Product (1 - n)
+	
 	@OneToMany(mappedBy="category")
 	private List<Product> products;
 
@@ -87,7 +87,7 @@ public class Category implements Serializable {
 		return video;
 	}
 
-	// Getter/Setter aliases for JSP EL compatibility (cate.id, cate.name, cate.icon)
+	
 	public int getId() {
 		return categoryId;
 	}

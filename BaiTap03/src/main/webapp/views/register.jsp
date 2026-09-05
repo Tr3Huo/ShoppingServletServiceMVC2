@@ -50,7 +50,7 @@
         </c:if>
 
         <form action="${pageContext.request.contextPath}/register" method="post">
-            <!-- 1. Tài khoản -->
+            
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span> 
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <!-- 2. Họ tên -->
+            
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span> 
@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <!-- 3. Nhập Email -->
+            
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <!-- 4. Số điện thoại -->
+            
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <!-- 5. Mật khẩu -->
+            
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <!-- 6. Nhập lại mật khẩu -->
+            
             <div class="form-group" style="margin-bottom: 15px;">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
@@ -98,12 +98,12 @@
                 </div>
             </div>
 
-            <!-- Nút Tạo tài khoản -->
+            
             <button type="submit" class="btn btn-primary btn-register">
                 <i class="fa fa-user-plus"></i> Tạo tài khoản
             </button>
 
-            <!-- Link chuyển về trang đăng nhập -->
+            
             <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #777;">
                 <p>Nếu bạn đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a></p>
             </div>

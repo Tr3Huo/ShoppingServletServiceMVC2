@@ -44,7 +44,7 @@ public class VerifyOtpController extends HttpServlet {
             return;
         }
 
-        // /verify-otp GET
+        
         String email = req.getParameter("email");
         if (email == null || email.isEmpty()) {
             HttpSession session = req.getSession(false);
@@ -84,7 +84,7 @@ public class VerifyOtpController extends HttpServlet {
         }
 
         if (user.getStatus() == 1) {
-            // Đã kích hoạt rồi
+            
             resp.sendRedirect(req.getContextPath() + "/login?activated=already");
             return;
         }

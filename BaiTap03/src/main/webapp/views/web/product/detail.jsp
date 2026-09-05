@@ -80,7 +80,7 @@
 </style>
 </head>
 <body>
-    <!-- Navbar Header -->
+    
     <nav class="navbar navbar-default" style="border-radius: 0; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.08);">
         <div class="container">
             <div class="navbar-header">
@@ -106,9 +106,9 @@
         </div>
     </nav>
 
-    <!-- Nội dung chi tiết 01 sản phẩm -->
+    
     <div class="container">
-        <!-- Breadcrumb -->
+        
         <ol class="breadcrumb" style="background-color: #fff;">
             <li><a href="<c:url value='/home'/>">Trang chủ</a></li>
             <li><a href="<c:url value='/product'/>">Sản phẩm</a></li>
@@ -120,7 +120,7 @@
 
         <div class="detail-container">
             <div class="row">
-                <!-- Cột hình ảnh sản phẩm lớn -->
+                
                 <div class="col-md-5">
                     <div class="product-img-box">
                         <c:if test="${not empty product.images}">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
 
-                <!-- Cột thông tin chi tiết -->
+                
                 <div class="col-md-7">
                     <h1 class="product-title">${product.productName}</h1>
 
@@ -197,7 +197,7 @@
                         </div>
                     </div>
 
-                    <!-- Nút điều hướng -->
+                    
                     <div>
                         <a href="<c:url value='/product'/>" class="btn btn-primary" style="margin-right: 10px;">
                             <i class="fa fa-arrow-left"></i> Quay lại danh sách sản phẩm
@@ -210,7 +210,7 @@
             </div>
         </div>
 
-        <!-- Gợi ý các sản phẩm cùng danh mục -->
+        
         <c:if test="${not empty relatedProducts}">
             <div style="margin-top: 30px; margin-bottom: 40px;">
                 <h3 style="font-weight: bold; color: #333; margin-bottom: 20px;">
